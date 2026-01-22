@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FeedController;
+use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +23,7 @@ Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 
 Route::post('/posts/{post}/like', [LikeController::class, 'toggle'])->name('posts.like');
 
-Route::view('/explore', 'feed.explore')->name('explore');
+Route::get('/explore', [ExploreController::class, 'index'])->name('explore');
 Route::view('/notifications', 'notifications.index')->name('notifications.index');
 Route::view('/profile', 'profiles.show')->name('profile.show');
 Route::view('/settings', 'settings.edit')->name('settings.edit');

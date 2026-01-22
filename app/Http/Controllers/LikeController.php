@@ -6,6 +6,7 @@ use App\Models\Like;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class LikeController extends Controller
 {
@@ -21,7 +22,7 @@ class LikeController extends Controller
                 'name' => 'Demo User',
                 'username' => 'demo',
                 'email' => 'demo@example.com',
-                'password' => 'password',
+                'password' => Hash::make('password'),
             ]);
         }
 
