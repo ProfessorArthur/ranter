@@ -9,6 +9,22 @@ use Illuminate\Support\Facades\Hash;
 
 class PostController extends Controller
 {
+    public function show(Post $post)
+    {
+        $post->load('user')->loadCount(['likes', 'replies']);
+
+        $replies = $post->replies()
+            ->with('user')
+            ->withCount(['likes', 'replies'])
+            ->latest()
+            ->paginate(25);
+
+        return view('posts.show', [
+            'post' => $post,
+            'replies' => $replies,
+        ]);
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([

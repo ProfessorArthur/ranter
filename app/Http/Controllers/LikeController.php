@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Like;
 use App\Models\Post;
 use App\Models\User;
+use App\Notifications\PostLiked;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -38,6 +39,11 @@ class LikeController extends Controller
                 'user_id' => $user->id,
                 'post_id' => $post->id,
             ]);
+
+            $postOwner = $post->user()->first();
+            if ($postOwner && $postOwner->id !== $user->id) {
+                $postOwner->notify(new PostLiked($user, $post));
+            }
         }
 
         return redirect()->back();

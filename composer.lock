@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "12f0e4826ade5bb75ea51f4024bc42bf",
+    "content-hash": "52d3eb4e0388e71e326a171ba826c879",
     "packages": [
         {
             "name": "brick/math",
@@ -1051,6 +1051,55 @@
                 }
             ],
             "time": "2025-08-22T14:27:06+00:00"
+        },
+        {
+            "name": "jdenticon/jdenticon",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dmester/jdenticon-php.git",
+                "reference": "fb39a98a0a54982a130b7e7b06305d4fd8c9717e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dmester/jdenticon-php/zipball/fb39a98a0a54982a130b7e7b06305d4fd8c9717e",
+                "reference": "fb39a98a0a54982a130b7e7b06305d4fd8c9717e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jdenticon\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Mester Pirttijärvi"
+                }
+            ],
+            "description": "Render PNG and SVG identicons.",
+            "homepage": "https://jdenticon.com/",
+            "keywords": [
+                "avatar",
+                "identicon",
+                "jdenticon"
+            ],
+            "support": {
+                "docs": "https://jdenticon.com/php-api.html",
+                "issues": "https://github.com/dmester/jdenticon-php/issues",
+                "source": "https://github.com/dmester/jdenticon-php"
+            },
+            "time": "2025-07-14T18:30:29+00:00"
         },
         {
             "name": "laravel/framework",

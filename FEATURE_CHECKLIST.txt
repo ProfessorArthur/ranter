@@ -1,0 +1,44 @@
+Ranter – Feature Status Checklist (Repo Audit)
+
+Implemented (working end-to-end)
+[x] Home feed with paginated posts list
+[x] Create text-only posts (uses demo user fallback)
+[x] Post detail view with replies list (read-only)
+[x] Like / unlike posts with database notifications
+[x] Explore page (top posts + new users)
+[x] Public profile page with post counts
+[x] Settings page for display name, username, bio
+[x] Layout, navigation, and mobile menu
+[x] Emoji picker UI (visual only)
+
+Partially implemented (exists but incomplete)
+[~] Authentication (no login/register; demo user fallback in controllers)
+[~] Replies (data model exists; no create route or UI)
+[~] Media attachments (model/migration exist; UI buttons present; no upload/store/display)
+[~] Follow system (model/migration exist; controller empty; follow buttons disabled)
+[~] Notifications (list only; only post-liked; no mark-as-read)
+[~] Search / trends / who-to-follow (static UI only)
+[~] Profile avatar/banner (placeholders; no upload or storage)
+[~] API (only /api/user route)
+[~] Messages (nav item present but disabled)
+
+Missing (not implemented)
+[ ] Login, registration, logout, password reset
+[ ] Authorization policies (edit/delete permissions)
+[ ] Post edit/delete
+[ ] Reply/quote post creation
+[ ] Follow/unfollow actions + follower feed
+[ ] Media upload handling and rendering in posts
+[ ] Notifications read/unread management
+[ ] Real-time updates (broadcasting/websockets)
+[ ] Direct messages feature
+[ ] Admin/moderation/reporting tools
+[ ] Tests covering core features
+
+Needs optimization / cleanup
+[ ] Remove demo user fallback; enforce auth middleware
+[ ] Avoid N+1 on profile posts (eager load post user)
+[ ] Wire emoji picker to insert emoji into textarea
+[ ] Disable unused UI elements or implement them (search, messages)
+[ ] Add image processing/storage constraints (size/type limits)
+[ ] Add queueing for notifications if volume increases

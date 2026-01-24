@@ -1,12 +1,12 @@
 <x-layouts.app>
     <x-slot:title>Explore</x-slot:title>
 
-    <div class="border-b border-slate-800 px-6 py-4">
+    <div class="border-b border-slate-800 px-4 py-4 sm:px-6">
         <h1 class="text-xl font-semibold">Explore</h1>
         <p class="mt-1 text-sm text-slate-400">Popular posts and new people to follow.</p>
     </div>
 
-    <div class="px-6 py-5">
+    <div class="px-4 py-5 sm:px-6">
         <h2 class="text-sm font-semibold text-slate-200">Top posts</h2>
 
         <div class="mt-3 space-y-4">
@@ -21,7 +21,7 @@
                         <span>{{ $post->created_at?->diffForHumans() }}</span>
                     </div>
 
-                    <p class="mt-2 whitespace-pre-wrap text-base text-slate-200">{{ $post->body }}</p>
+                    <p class="mt-2 whitespace-pre-wrap wrap-break-word text-base text-slate-200">{{ $post->body }}</p>
 
                     <div class="mt-3 flex items-center gap-6 text-sm text-slate-400">
                         <span>💬 {{ $post->replies_count }}</span>
@@ -34,12 +34,12 @@
         </div>
     </div>
 
-    <div class="border-t border-slate-800 px-6 py-5">
+    <div class="border-t border-slate-800 px-4 py-5 sm:px-6">
         <h2 class="text-sm font-semibold text-slate-200">New users</h2>
 
         <div class="mt-3 space-y-2">
             @forelse ($newUsers as $user)
-                <div class="flex items-center justify-between rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3">
+                <div class="flex items-center justify-between gap-3 rounded-2xl border border-slate-800 bg-slate-950 px-4 py-3">
                     <div class="min-w-0">
                         <div class="truncate text-sm font-semibold text-slate-100">{{ $user->display_name ?: $user->name }}</div>
                         <div class="truncate text-sm text-slate-400">

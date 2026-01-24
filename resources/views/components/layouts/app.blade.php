@@ -15,16 +15,85 @@
     {{ $head ?? '' }}
 </head>
 <body class="min-h-screen bg-slate-950 text-slate-100">
-    <div class="mx-auto flex min-h-screen max-w-6xl">
+    {{-- Mobile top bar + hamburger navigation --}}
+    <header class="fixed inset-x-0 top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur lg:hidden">
+        <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3">
+            <a href="{{ url('/') }}" class="flex items-center gap-2 text-base font-semibold tracking-tight">
+                <img src="{{ asset('favicon-32x32.png') }}" alt="Ranter logo" class="h-7 w-7">
+                <span>Ranter</span>
+            </a>
+
+            <button
+                type="button"
+                class="inline-flex items-center justify-center rounded-xl border border-slate-800 bg-slate-950 px-3 py-2 text-sm font-semibold hover:bg-slate-900"
+                aria-label="Open menu"
+                aria-controls="mobile-menu"
+                aria-expanded="false"
+                data-mobile-menu-open
+            >
+                Menu
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-menu-overlay" class="fixed inset-0 z-40 hidden bg-black/60 lg:hidden"></div>
+
+    <aside
+        id="mobile-menu"
+        class="fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] -translate-x-full border-r border-slate-800 bg-slate-950 px-5 py-5 transition-transform duration-200 ease-out lg:hidden"
+        aria-label="Mobile navigation"
+    >
+        <div class="flex items-center justify-between">
+            <a href="{{ url('/') }}" class="flex items-center gap-2 text-lg font-semibold tracking-tight">
+                <img src="{{ asset('favicon-32x32.png') }}" alt="Ranter logo" class="h-7 w-7">
+                <span>Ranter</span>
+            </a>
+
+            <button
+                type="button"
+                class="inline-flex items-center justify-center rounded-xl border border-slate-800 bg-slate-950 px-3 py-2 text-sm font-semibold hover:bg-slate-900"
+                aria-label="Close menu"
+                data-mobile-menu-close
+            >
+                Close
+            </button>
+        </div>
+
+        <nav class="mt-6 space-y-2 text-base">
+            <a href="{{ route('home') }}" class="flex items-center gap-3 rounded-full px-4 py-3 font-semibold hover:bg-slate-900">Home</a>
+            <a href="{{ route('explore') }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Explore</a>
+            <a href="{{ route('notifications.index') }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Notifications</a>
+            <a href="#" class="flex items-center gap-3 rounded-full px-4 py-3 opacity-60 hover:bg-slate-900" aria-disabled="true" title="Coming soon">Messages</a>
+            @auth
+                <a href="{{ route('profile.show', ['username' => auth()->user()->username]) }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Profile</a>
+            @else
+                <a href="{{ route('profile.show', ['username' => 'demo']) }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Profile</a>
+            @endauth
+            <a href="{{ route('settings.edit') }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Settings</a>
+        </nav>
+
+        <button class="mt-6 w-full rounded-full bg-sky-500 px-4 py-3 text-sm font-semibold text-white hover:bg-sky-400">
+            Post
+        </button>
+    </aside>
+
+    <div class="mx-auto flex min-h-screen max-w-6xl flex-col lg:flex-row">
         <aside class="hidden w-64 border-r border-slate-800 px-6 py-6 lg:block">
-            <a href="{{ url('/') }}" class="text-2xl font-semibold tracking-tight">Ranter</a>
+            <a href="{{ url('/') }}" class="flex items-center gap-2 text-2xl font-semibold tracking-tight">
+                <img src="{{ asset('favicon-32x32.png') }}" alt="Ranter logo" class="h-8 w-8">
+                <span>Ranter</span>
+            </a>
 
             <nav class="mt-8 space-y-2 text-base">
                 <a href="{{ route('home') }}" class="flex items-center gap-3 rounded-full px-4 py-3 font-semibold hover:bg-slate-900">Home</a>
                 <a href="{{ route('explore') }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Explore</a>
                 <a href="{{ route('notifications.index') }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Notifications</a>
                 <a href="#" class="flex items-center gap-3 rounded-full px-4 py-3 opacity-60 hover:bg-slate-900" aria-disabled="true" title="Coming soon">Messages</a>
-                <a href="{{ route('profile.show') }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Profile</a>
+                @auth
+                    <a href="{{ route('profile.show', ['username' => auth()->user()->username]) }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Profile</a>
+                @else
+                    <a href="{{ route('profile.show', ['username' => 'demo']) }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Profile</a>
+                @endauth
                 <a href="{{ route('settings.edit') }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Settings</a>
             </nav>
 
@@ -33,7 +102,7 @@
             </button>
         </aside>
 
-        <main class="flex-1 border-x border-slate-800">
+        <main class="w-full min-w-0 flex-1 border-slate-800 pt-16 pb-8 lg:border-x lg:pt-0 lg:pb-0">
             {{ $slot }}
         </main>
 
