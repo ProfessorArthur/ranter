@@ -20,7 +20,7 @@
                         <div class="text-sm text-slate-200">
                             <span class="font-semibold">{{ $data['actor_name'] ?? 'Someone' }}</span>
                             <span class="text-slate-400">
-                                (@{{ $data['actor_username'] ?? 'unknown' }}) liked your post
+                                ({{ '@' . ($data['actor_username'] ?? 'unknown') }}) liked your post
                             </span>
                         </div>
                     @else

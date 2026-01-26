@@ -14,6 +14,12 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public const ROLE_SUPERADMIN = 'su';
+    public const ROLE_ADMIN = 'admin';
+    public const ROLE_MODERATION = 'moderation';
+    public const ROLE_USER = 'user';
+    public const ROLE_GUEST = 'guest';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -25,6 +31,7 @@ class User extends Authenticatable
         'display_name',
         'email',
         'password',
+        'role',
         'bio',
         'avatar_path',
         'banner_path',
@@ -70,5 +77,32 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followed_id')
             ->withTimestamps();
+    }
+
+    public function hasRole(string|array $roles): bool
+    {
+        $roles = is_array($roles) ? $roles : [$roles];
+
+        return in_array($this->role, $roles, true);
+    }
+
+    public function isSuperAdmin(): bool
+    {
+        return $this->role === self::ROLE_SUPERADMIN;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function isModerator(): bool
+    {
+        return $this->role === self::ROLE_MODERATION;
+    }
+
+    public function isStandardUser(): bool
+    {
+        return $this->role === self::ROLE_USER;
     }
 }

@@ -29,5 +29,40 @@
             <p class="mt-6 text-center text-xs text-slate-500">Join the conversation when you're ready.</p>
         </div>
     </div>
+    <script>
+        window.addEventListener('load', () => {
+            const passwordToggles = document.querySelectorAll('[data-password-toggle]');
+            passwordToggles.forEach((button) => {
+                button.addEventListener('click', () => {
+                    const targetId = button.getAttribute('data-password-toggle');
+                    if (!targetId) {
+                        return;
+                    }
+
+                    const input = document.getElementById(targetId);
+                    if (!input) {
+                        return;
+                    }
+
+                    const isHidden = input.getAttribute('type') === 'password';
+                    input.setAttribute('type', isHidden ? 'text' : 'password');
+                    button.setAttribute('aria-pressed', String(isHidden));
+
+                    const showIcon = button.querySelector('[data-password-icon-show]');
+                    const hideIcon = button.querySelector('[data-password-icon-hide]');
+
+                    if (showIcon && hideIcon) {
+                        if (isHidden) {
+                            showIcon.classList.add('hidden');
+                            hideIcon.classList.remove('hidden');
+                        } else {
+                            showIcon.classList.remove('hidden');
+                            hideIcon.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

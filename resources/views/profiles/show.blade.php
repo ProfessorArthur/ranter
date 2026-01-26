@@ -32,7 +32,7 @@
 
             <div class="mt-3">
                 <h1 class="text-xl font-semibold text-slate-100">{{ $user->display_name ?: $user->name }}</h1>
-                <p class="text-sm text-slate-400">@{{ $user->username }}</p>
+                <p class="text-sm text-slate-400">{{ '@' . $user->username }}</p>
 
                 @if ($user->bio)
                     <p class="mt-3 text-sm text-slate-200">{{ $user->bio }}</p>

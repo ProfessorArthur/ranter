@@ -128,7 +128,7 @@
 
         <main class="w-full min-w-0 flex-1 border-slate-800 pt-16 pb-8 lg:border-x lg:pt-0 lg:pb-0">
             @guest
-                @unless (request()->routeIs('login', 'register', 'password.*', 'verification.*'))
+                @unless (request()->routeIs('login', 'register', 'password.*', 'verification.*', 'welcome'))
                     <div class="border-b border-slate-800 bg-slate-950/80 px-4 py-3 text-sm text-slate-200 sm:px-6">
                         <span class="font-semibold">You are not registered / logged in yet.</span>
                         <span class="text-slate-400">You can browse posts, but sign in to like, post, or follow.</span>
@@ -228,6 +228,38 @@
                         setOpenState(false);
                     }
                 }
+            });
+
+            const passwordToggles = document.querySelectorAll('[data-password-toggle]');
+            passwordToggles.forEach((button) => {
+                button.addEventListener('click', () => {
+                    const targetId = button.getAttribute('data-password-toggle');
+                    if (!targetId) {
+                        return;
+                    }
+
+                    const input = document.getElementById(targetId);
+                    if (!input) {
+                        return;
+                    }
+
+                    const isHidden = input.getAttribute('type') === 'password';
+                    input.setAttribute('type', isHidden ? 'text' : 'password');
+                    button.setAttribute('aria-pressed', String(isHidden));
+
+                    const showIcon = button.querySelector('[data-password-icon-show]');
+                    const hideIcon = button.querySelector('[data-password-icon-hide]');
+
+                    if (showIcon && hideIcon) {
+                        if (isHidden) {
+                            showIcon.classList.add('hidden');
+                            hideIcon.classList.remove('hidden');
+                        } else {
+                            showIcon.classList.remove('hidden');
+                            hideIcon.classList.add('hidden');
+                        }
+                    }
+                });
             });
         });
     </script>

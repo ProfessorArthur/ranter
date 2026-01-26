@@ -60,7 +60,7 @@
         <div class="flex flex-wrap items-center gap-2 text-sm text-slate-400">
           <strong class="text-slate-100">{{ $post->user->display_name ?: $post->user->name }}</strong>
           @if ($post->user->username)
-            <span>@{{ $post->user->username }}</span>
+            <span>{{ '@' . $post->user->username }}</span>
           @endif
           <span>•</span>
           <span>{{ $post->created_at?->diffForHumans() }}</span>
