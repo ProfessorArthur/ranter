@@ -25,6 +25,24 @@ class SettingsController extends Controller
             return redirect()->route('settings.edit');
         }
 
+        $displayName = $request->input('display_name');
+        $username = $request->input('username');
+        $bio = $request->input('bio');
+
+        $request->merge([
+            'display_name' => is_string($displayName) ? trim($displayName) : $displayName,
+            'username' => is_string($username) ? strtolower(trim($username)) : $username,
+            'bio' => is_string($bio) ? trim($bio) : $bio,
+        ]);
+
+        if (is_string($displayName) && trim($displayName) === '') {
+            $request->merge(['display_name' => null]);
+        }
+
+        if (is_string($bio) && trim($bio) === '') {
+            $request->merge(['bio' => null]);
+        }
+
         $validated = $request->validate([
             'display_name' => ['nullable', 'string', 'max:60'],
             'username' => [

@@ -1,3 +1,7 @@
 import './bootstrap';
-import './emoji'
-import './mobileNav'
+
+import Alpine from 'alpinejs';
+
+window.Alpine = Alpine;
+
+Alpine.start();

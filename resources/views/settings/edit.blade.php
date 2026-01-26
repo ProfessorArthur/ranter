@@ -1,4 +1,4 @@
-<x-layouts.app>
+<x-app-layout>
     <x-slot:title>Settings</x-slot:title>
 
     <div class="border-b border-slate-800 px-4 py-4 sm:px-6">
@@ -71,4 +71,4 @@
             </div>
         </form>
     @endif
-</x-layouts.app>
+</x-app-layout>

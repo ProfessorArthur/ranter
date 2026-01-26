@@ -1,12 +1,30 @@
-<x-layouts.app>
+<x-app-layout>
     <x-slot:title>{{ $user->display_name ?: $user->name }}</x-slot:title>
 
+    @php
+        $bannerUrl = $user->banner_path
+            ? (str_starts_with($user->banner_path, 'http') ? $user->banner_path : asset('storage/' . ltrim($user->banner_path, '/')))
+            : null;
+
+        $avatarUrl = $user->avatar_path
+            ? (str_starts_with($user->avatar_path, 'http') ? $user->avatar_path : asset('storage/' . ltrim($user->avatar_path, '/')))
+            : null;
+    @endphp
+
     <div class="border-b border-slate-800">
-        <div class="h-32 bg-slate-900"></div>
+        <div class="h-32 bg-slate-900">
+            @if ($bannerUrl)
+                <img src="{{ $bannerUrl }}" alt="{{ $user->display_name ?: $user->name }} banner" class="h-32 w-full object-cover">
+            @endif
+        </div>
 
         <div class="px-6 pb-5">
             <div class="-mt-10 flex items-end justify-between">
-                <div class="h-20 w-20 rounded-full border-4 border-slate-950 bg-slate-700"></div>
+                <div class="h-20 w-20 rounded-full border-4 border-slate-950 bg-slate-700 overflow-hidden">
+                    @if ($avatarUrl)
+                        <img src="{{ $avatarUrl }}" alt="{{ $user->display_name ?: $user->name }} avatar" class="h-full w-full object-cover">
+                    @endif
+                </div>
                 <button class="rounded-full bg-slate-100 px-4 py-1.5 text-sm font-semibold text-slate-900 opacity-60" disabled>
                     Follow
                 </button>
@@ -52,4 +70,4 @@
     <div class="px-6 py-6">
         {{ $posts->links() }}
     </div>
-</x-layouts.app>
+</x-app-layout>

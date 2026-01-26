@@ -1,4 +1,4 @@
-<x-layouts.app>
+<x-app-layout>
     <x-slot:title>Explore</x-slot:title>
 
     <div class="border-b border-slate-800 px-4 py-4 sm:px-6">
@@ -59,4 +59,4 @@
             @endforelse
         </div>
     </div>
-</x-layouts.app>
+</x-app-layout>

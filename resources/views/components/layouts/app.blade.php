@@ -66,10 +66,17 @@
             <a href="#" class="flex items-center gap-3 rounded-full px-4 py-3 opacity-60 hover:bg-slate-900" aria-disabled="true" title="Coming soon">Messages</a>
             @auth
                 <a href="{{ route('profile.show', ['username' => auth()->user()->username]) }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Profile</a>
+                <a href="{{ route('settings.edit') }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Settings</a>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="w-full text-left flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">
+                        Logout
+                    </button>
+                </form>
             @else
-                <a href="{{ route('profile.show', ['username' => 'demo']) }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Profile</a>
+                <a href="{{ route('login') }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Login</a>
+                <a href="{{ route('register') }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Register</a>
             @endauth
-            <a href="{{ route('settings.edit') }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Settings</a>
         </nav>
 
         <button class="mt-6 w-full rounded-full bg-sky-500 px-4 py-3 text-sm font-semibold text-white hover:bg-sky-400">
@@ -91,10 +98,17 @@
                 <a href="#" class="flex items-center gap-3 rounded-full px-4 py-3 opacity-60 hover:bg-slate-900" aria-disabled="true" title="Coming soon">Messages</a>
                 @auth
                     <a href="{{ route('profile.show', ['username' => auth()->user()->username]) }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Profile</a>
+                    <a href="{{ route('settings.edit') }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Settings</a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="w-full text-left flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">
+                            Logout
+                        </button>
+                    </form>
                 @else
-                    <a href="{{ route('profile.show', ['username' => 'demo']) }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Profile</a>
+                    <a href="{{ route('login') }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Login</a>
+                    <a href="{{ route('register') }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Register</a>
                 @endauth
-                <a href="{{ route('settings.edit') }}" class="flex items-center gap-3 rounded-full px-4 py-3 hover:bg-slate-900">Settings</a>
             </nav>
 
             <button class="mt-6 w-full rounded-full bg-sky-500 px-4 py-3 text-sm font-semibold text-white hover:bg-sky-400">
@@ -103,6 +117,19 @@
         </aside>
 
         <main class="w-full min-w-0 flex-1 border-slate-800 pt-16 pb-8 lg:border-x lg:pt-0 lg:pb-0">
+            @guest
+                @unless (request()->routeIs('login', 'register', 'password.*', 'verification.*'))
+                    <div class="border-b border-slate-800 bg-slate-950/80 px-4 py-3 text-sm text-slate-200 sm:px-6">
+                        <span class="font-semibold">You are not registered / logged in yet.</span>
+                        <span class="text-slate-400">You can browse posts, but sign in to like, post, or follow.</span>
+                        <span class="ml-2">
+                            <a class="font-semibold text-sky-400 hover:text-sky-300" href="{{ route('login') }}">Login</a>
+                            <span class="text-slate-500">•</span>
+                            <a class="font-semibold text-sky-400 hover:text-sky-300" href="{{ route('register') }}">Register</a>
+                        </span>
+                    </div>
+                @endunless
+            @endguest
             {{ $slot }}
         </main>
 

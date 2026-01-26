@@ -1,4 +1,4 @@
-<x-layouts.app>
+<x-app-layout>
     <x-slot:title>Post</x-slot:title>
 
     <div class="border-b border-slate-800 px-4 py-4 sm:px-6">
@@ -54,4 +54,4 @@
     <div class="px-4 py-6 sm:px-6">
         {{ $replies->links() }}
     </div>
-</x-layouts.app>
+</x-app-layout>

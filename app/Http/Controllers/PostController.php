@@ -27,6 +27,13 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        $body = $request->input('body');
+        if (is_string($body)) {
+            $request->merge([
+                'body' => trim($body),
+            ]);
+        }
+
         $validated = $request->validate([
             'body' => ['required', 'string', 'max:500'],
         ]);

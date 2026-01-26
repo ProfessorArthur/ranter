@@ -1,4 +1,4 @@
-<x-layouts.app>
+<x-app-layout>
   <x-slot:title>Ranter | Home</x-slot:title>
 
   <header class="sticky top-0 z-10 border-b border-slate-800 bg-slate-950/80 px-4 py-4 backdrop-blur sm:px-6">
@@ -91,4 +91,4 @@
       {{ $posts->links() }}
     </div>
   @endif
-</x-layouts.app>
+</x-app-layout>

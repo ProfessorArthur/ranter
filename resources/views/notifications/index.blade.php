@@ -1,4 +1,4 @@
-<x-layouts.app>
+<x-app-layout>
     <x-slot:title>Notifications</x-slot:title>
 
     <div class="border-b border-slate-800 px-4 py-4 sm:px-6">
@@ -46,4 +46,4 @@
             </div>
         @endif
     @endif
-</x-layouts.app>
+</x-app-layout>
